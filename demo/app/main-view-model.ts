@@ -20,7 +20,13 @@ export class HelloWorldModel extends Observable {
   public showSimple() {
     this._SnackBar.simple(this.get('snackText')).then(args => {
       this.set('jsonResult', JSON.stringify(args));
-    });
+    }).catch( args => { console.error(args)});
+  }
+
+  public dismiss() {
+    this._SnackBar.dismiss().then(args => {
+      this.set('jsonResult', JSON.stringify(args));
+    }).catch( args => { console.error(args)});
   }
 
   public showAction() {

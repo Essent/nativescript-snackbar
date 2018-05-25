@@ -5,6 +5,7 @@
         <stack-layout padding="10">
             <button text="Simple Snackbar" tap="{{ showSimple }}" />
             <button text="Action Snackbar" tap="{{ showAction }}" />
+            <button text="Dismiss Snackbar" tap="{{ dismiss }}" />
             <TextField hint="Snack Text" text="{{ snackText }}" />
             <TextField hint="Action Text" text="{{ actionText }}" />
             <Label text="{{ jsonResult }}" textWrap="true" />

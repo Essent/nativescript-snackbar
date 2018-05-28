@@ -9,7 +9,7 @@
     }
   },
   "dependencies": {
-    "nativescript-snackbar": "file:../src",
+    "@essent/nativescript-snackbar": "file:../src",
     "tns-core-modules": "^4.0.0"
   },
   "devDependencies": {

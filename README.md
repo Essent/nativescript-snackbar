@@ -1,8 +1,4 @@
-[![npm](https://img.shields.io/npm/v/nativescript-snackbar.svg)](https://www.npmjs.com/package/nativescript-snackbar)
-[![npm](https://img.shields.io/npm/dt/nativescript-snackbar.svg?label=npm%20downloads)](https://www.npmjs.com/package/nativescript-snackbar)
-[![GitHub forks](https://img.shields.io/github/forks/bradmartin/nativescript-snackbar.svg)](https://github.com/bradmartin/nativescript-snackbar/network)
-[![GitHub stars](https://img.shields.io/github/stars/bradmartin/nativescript-snackbar.svg)](https://github.com/bradmartin/nativescript-snackbar/stargazers)
-[![PayPal Donate](https://img.shields.io/badge/Donate-PayPal-ff4081.svg)](https://www.paypal.me/bradwayne88)
+[![npm version](https://badge.fury.io/js/%40essent%2Fnativescript-snackbar.svg)](https://www.npmjs.com/package/@essent/nativescript-snackbar)
 
 # NativeScript Snackbar :lollipop: :chocolate_bar:
 
@@ -16,20 +12,14 @@ Use the Material Design Snackbar in your {N} app, iOS uses [Material Snackbar Co
 
 ### NativeScript 4x
 
-`tns plugin add nativescript-snackbar`
-
-### NativeScript 3x-
-
-`tns plugin add nativescript-snackbar@2.0.1` or just pin `nativescript-snackbar: 2.0.1` in your app's package.json - to avoid any build conflicts is why the latest has been bumped a major.
-
-Requires Xcode 9+ to build for iOS, so update Xcode if needed.
+`tns plugin add @essent/nativescript-snackbar`
 
 ## Usage
 
 ### TS
 
 ```typescript
-import { SnackBar, SnackBarOptions } from "nativescript-snackbar";
+import { SnackBar, SnackBarOptions } from "@essent/nativescript-snackbar";
 
 // Create an instance of SnackBar
 let snackbar = new SnackBar();

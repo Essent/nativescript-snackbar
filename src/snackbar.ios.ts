@@ -1,6 +1,9 @@
 import { SnackBarOptions } from './index';
+import { Accuracy } from 'tns-core-modules/ui/enums';
 
-declare const SSSnackbar: any;
+declare const MDCSnackbarManager: any;
+declare const MDCSnackbarMessage: any;
+declare const MDCSnackbarMessageAction: any;
 
 export class SnackBar {
   private _snackbar = null;
@@ -9,32 +12,18 @@ export class SnackBar {
   public simple(snackText: string) {
     return new Promise((resolve, reject) => {
       const timeout = 3;
-
       try {
-        this._snackbar = SSSnackbar.snackbarWithMessageActionTextDurationActionBlockDismissalBlock(
-          snackText,
-          null,
-          timeout,
-          args => {
-            //Action, Do Nothing, just close it
-            this._snackbar.dismiss(); //Force close
-            resolve({
-              command: 'Dismiss',
-              reason: 'Manual',
-              event: args
-            });
-          },
-          args => {
-            //Dismissal, Do Nothing
-            resolve({
-              command: 'Dismiss',
-              reason: 'Timeout',
-              event: args
-            });
-          }
-        );
-
-        this._snackbar.show();
+        this._snackbar = new MDCSnackbarMessage();
+        this._snackbar.duration = timeout;
+        this._snackbar.text = snackText;
+        this._snackbar.completionHandler = function(b: boolean) {
+          resolve({
+            command: 'Dismiss',
+            reason: b ? 'Swipe' : 'Timeout',
+            event: ''
+          });
+        };
+        MDCSnackbarManager.showMessage(this._snackbar);
       } catch (ex) {
         reject(ex);
       }
@@ -46,28 +35,27 @@ export class SnackBar {
       try {
         if (!options.hideDelay) options.hideDelay = 3000;
 
-        this._snackbar = SSSnackbar.snackbarWithMessageActionTextDurationActionBlockDismissalBlock(
-          options.snackText,
-          options.actionText,
-          options.hideDelay / 1000,
-          args => {
-            resolve({
-              command: 'Action',
-              event: args
-            });
-          },
-          args => {
-            let reason = this._isDismissedManual ? 'Manual' : 'Timeout';
-            this._isDismissedManual = false; //reset
-            resolve({
-              command: 'Dismiss',
-              reason: reason,
-              event: args
-            });
-          }
-        );
+        this._snackbar = new MDCSnackbarMessage();
+        this._snackbar.duration = options.hideDelay / 1000;
+        this._snackbar.text = options.snackText;
+        this._snackbar.completionHandler = function(b: boolean) {
+          resolve({
+            command: 'Dismiss',
+            reason: b ? 'Swipe' : 'Timeout',
+            event: ''
+          });
+        };
 
-        this._snackbar.show();
+        let action = new MDCSnackbarMessageAction();
+        action.handler = function() {
+          resolve({
+            command: 'Action',
+            event: ''
+          });
+        };
+        action.title = options.actionText;
+        this._snackbar.action = action;
+        MDCSnackbarManager.showMessage(this._snackbar);
       } catch (ex) {
         reject(ex);
       }
@@ -79,7 +67,7 @@ export class SnackBar {
       if (this._snackbar !== null && this._snackbar != 'undefined') {
         try {
           this._isDismissedManual = true;
-          this._snackbar.dismiss();
+          MDCSnackbarManager.dismissAndCallCompletionBlocksWithCategory(null);
 
           //Return AFTER the item is dismissed, 200ms delay
           setTimeout(() => {

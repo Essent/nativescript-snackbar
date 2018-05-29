@@ -3,10 +3,13 @@
     "id": "org.nativescript.snackbar",
     "tns-android": {
       "version": "4.0.1"
+    },
+    "tns-ios": {
+      "version": "4.0.1"
     }
   },
   "dependencies": {
-    "nativescript-snackbar": "../src",
+    "@essent/nativescript-snackbar": "file:../src",
     "tns-core-modules": "^4.0.0"
   },
   "devDependencies": {

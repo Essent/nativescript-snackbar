@@ -2,10 +2,10 @@ import { Color } from 'tns-core-modules/color';
 import { topmost } from 'tns-core-modules/ui/frame';
 import { SnackBarOptions } from './index';
 
-// declare var android;
+declare var android;
 
 export class SnackBar {
-  private _snackbar: android.support.design.widget.Snackbar;
+  private _snackbar: any;
   private _snackCallback = android.support.design.widget.Snackbar.Callback.extend({
     resolve: null,
     onDismissed(snackbar, event) {
@@ -154,4 +154,5 @@ function _getReason(value) {
   } else if (value === 2) {
     return 'Timeout';
   }
+  return '';
 }

@@ -10,13 +10,9 @@ Use the Material Design Snackbar in your {N} app, iOS uses [Material Snackbar Co
 
 ## Installation
 
-### NativeScript 4x
-
 `tns plugin add @essent/nativescript-snackbar`
 
 ## Usage
-
-### TS
 
 ```typescript
 import { SnackBar, SnackBarOptions } from "@essent/nativescript-snackbar";

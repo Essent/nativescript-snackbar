@@ -1,1 +1,1 @@
-pod 'MaterialComponents/Snackbar'
+pod 'MaterialComponents/Snackbar', '~> 55.2.0'
